@@ -1,0 +1,49 @@
+---
+layout: default
+---
+<section class="hero" aria-labelledby="home-title">
+  <div class="hero-copy">
+    <p class="eyebrow"><span></span> 个人写作手记</p>
+    <h1 id="home-title">写下来，<br>就有了<span>回声</span>。</h1>
+    <p class="hero-description">记下日常里值得多看一眼的事，也留一点地方给虚构和读过的书。</p>
+    <a class="primary-link" href="{{ '/archive/' | relative_url }}">浏览文章 <span aria-hidden="true">↗</span></a>
+  </div>
+  <figure class="hero-figure">
+    <img src="{{ '/assets/paper.svg' | relative_url }}" width="560" height="440" alt="">
+    <figcaption><span>FIG. 01</span><span>纸上留白</span></figcaption>
+  </figure>
+</section>
+
+<div class="home-grid">
+  <section class="latest" aria-labelledby="latest-title">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">01 / RECENT</p>
+        <h2 id="latest-title">最近写的</h2>
+      </div>
+      <a class="text-link" href="{{ '/archive/' | relative_url }}">全部文章 <span aria-hidden="true">→</span></a>
+    </div>
+    <ul class="post-list">
+      {% for post in site.posts limit: 4 %}
+        {% include post-row.html post=post %}
+      {% else %}
+        <li class="empty">第一篇文章还在路上。</li>
+      {% endfor %}
+    </ul>
+  </section>
+  <aside class="shelves" aria-labelledby="shelves-title">
+    <p class="eyebrow">02 / INDEX</p>
+    <h2 id="shelves-title">按分类阅读</h2>
+    {% assign categories = site.categories | sort %}
+    <ul class="shelf-list">
+      {% for category in categories %}
+        <li><a href="{{ '/archive/' | relative_url }}?category={{ category[0] | url_encode }}">
+          <span>{{ category[0] | escape }}</span>
+          <span class="shelf-count">{{ category[1].size }} 篇 <span aria-hidden="true">→</span></span>
+        </a></li>
+      {% else %}
+        <li class="empty">文章发布后会在这里显示分类。</li>
+      {% endfor %}
+    </ul>
+  </aside>
+</div>

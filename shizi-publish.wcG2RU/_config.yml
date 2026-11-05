@@ -1,0 +1,16 @@
+title: 拾字
+description: 一份关于日常、虚构和阅读的写作手记。
+lang: zh-CN
+timezone: Australia/Melbourne
+permalink: /posts/:year/:month/:day/:slug/
+markdown: kramdown
+kramdown:
+  input: GFM
+exclude:
+  - README.md
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post

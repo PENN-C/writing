@@ -1,0 +1,54 @@
+---
+layout: default
+title: 文章归档
+permalink: /archive/
+---
+<header class="page-heading">
+  <p class="eyebrow"><span></span> THE ARCHIVE</p>
+  <h1>文章归档</h1>
+  <p>按时间翻阅，也可以循着分类和标签慢慢找。</p>
+</header>
+
+<section class="archive" aria-labelledby="archive-title">
+  <form class="archive-filters" id="archive-filters" hidden role="search">
+    <div class="search-field">
+      <label for="archive-query">关键词</label>
+      <input id="archive-query" name="q" type="search" placeholder="搜索标题、摘要或标签">
+    </div>
+    <div>
+      <label for="archive-category">分类</label>
+      <select id="archive-category" name="category">
+        <option value="">全部分类</option>
+        {% assign categories = site.categories | sort %}
+        {% for category in categories %}
+          <option value="{{ category[0] | escape }}">{{ category[0] | escape }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="archive-tag">标签</label>
+      <select id="archive-tag" name="tag">
+        <option value="">全部标签</option>
+        {% assign tags = site.tags | sort %}
+        {% for tag in tags %}
+          <option value="{{ tag[0] | escape }}">{{ tag[0] | escape }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="reset">清空筛选</button>
+  </form>
+
+  <div class="section-heading archive-heading">
+    <h2 id="archive-title">文章列表</h2>
+    <p id="archive-count" aria-live="polite">{{ site.posts.size }} 篇文章</p>
+  </div>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      {% include post-row.html post=post %}
+    {% endfor %}
+  </ul>
+  <p class="empty" id="archive-empty"{% if site.posts.size > 0 %} hidden{% endif %}>
+    {% if site.posts.size > 0 %}没有符合条件的文章。{% else %}第一篇文章还在路上。{% endif %}
+  </p>
+</section>
+<script src="{{ '/assets/archive.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>

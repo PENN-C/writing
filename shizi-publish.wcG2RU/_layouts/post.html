@@ -1,0 +1,25 @@
+---
+layout: default
+---
+<article class="article">
+  <a class="text-link back-link" href="{{ '/archive/' | relative_url }}">← 文章归档</a>
+  <header class="article-header">
+    <div class="article-meta">
+      {% for category in page.categories %}
+        <a class="category-label" href="{{ '/archive/' | relative_url }}?category={{ category | url_encode }}">{{ category | escape }}</a>
+      {% endfor %}
+      <time datetime="{{ page.date | date: '%Y-%m-%d' }}">{{ page.date | date: '%Y.%m.%d' }}</time>
+      {% if page.sample %}<span class="sample-label">示例文章</span>{% endif %}
+    </div>
+    <h1>{{ page.title | escape }}</h1>
+    {% if page.summary %}<p class="article-deck">{{ page.summary | escape }}</p>{% endif %}
+  </header>
+  <div class="prose">{{ content }}</div>
+  {% if page.tags.size > 0 %}
+    <ul class="tag-list" aria-label="文章标签">
+      {% for tag in page.tags %}
+        <li><a href="{{ '/archive/' | relative_url }}?tag={{ tag | url_encode }}"># {{ tag | escape }}</a></li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</article>

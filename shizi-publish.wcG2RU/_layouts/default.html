@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }}</title>
+  <meta name="description" content="{{ page.summary | default: site.description | escape }}">
+  <meta name="theme-color" content="#f8f5ee">
+  <link rel="icon" type="image/svg+xml" href="{{ '/assets/mark.svg' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到正文</a>
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="{{ '/' | relative_url }}">
+        <img width="32" height="32" src="{{ '/assets/mark.svg' | relative_url }}" alt="">
+        <span>{{ site.title | escape }}</span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>首页</a>
+        <a href="{{ '/archive/' | relative_url }}"{% if page.url == '/archive/' or page.layout == 'post' %} aria-current="{% if page.layout == 'post' %}location{% else %}page{% endif %}"{% endif %}>文章归档</a>
+        <a href="{{ '/about/' | relative_url }}"{% if page.url == '/about/' %} aria-current="page"{% endif %}>关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="shell">{{ content }}</main>
+
+  <footer class="site-footer">
+    <div class="shell footer-inner">
+      <span><strong>{{ site.title | escape }}</strong> <span class="footer-divider">/</span> 写作手记</span>
+      <a href="#main">回到顶部 ↑</a>
+    </div>
+  </footer>
+</body>
+</html>

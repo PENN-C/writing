@@ -1,0 +1,14 @@
+{% assign entry = include.post %}
+<li class="post-row" data-post data-categories="{{ entry.categories | jsonify | escape }}" data-tags="{{ entry.tags | jsonify | escape }}">
+  <div class="post-meta">
+    <time datetime="{{ entry.date | date: '%Y-%m-%d' }}">{{ entry.date | date: '%Y.%m.%d' }}</time>
+    {% for category in entry.categories %}
+      <a class="category-label" href="{{ '/archive/' | relative_url }}?category={{ category | url_encode }}">{{ category | escape }}</a>
+    {% endfor %}
+  </div>
+  <div class="post-details">
+    <h3><a href="{{ entry.url | relative_url }}">{{ entry.title | escape }}</a></h3>
+    <p>{{ entry.summary | default: entry.excerpt | strip_html | strip | truncate: 95 | escape }}</p>
+  </div>
+  <a class="row-arrow" href="{{ entry.url | relative_url }}" aria-hidden="true" tabindex="-1">↗</a>
+</li>
